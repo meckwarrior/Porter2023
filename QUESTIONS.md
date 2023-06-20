@@ -9,6 +9,7 @@ Questões
 		Realizar os principais casos de testes para eliminar qualquer possibilidade de erro, pois seria inviável escrever todos os testes de caso possíveis.
 
 2. Como você lidou com a performance na implementação do desafio 2, considerando que o array pode ter até 1 milhão de números?
+	Eu usei um laço que lê o array em um uníca passada. Desta forma, fazendo com que a complexidade do algorítimo seja O(n) e tenha uma boa performance com arrays grandes.
 
 3. Como você lidou com os possíveis erros de entrada na implementação do desafio 3, como uma divisão por zero ou uma expressão inválida?
 
