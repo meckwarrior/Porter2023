@@ -11,6 +11,9 @@ namespace Porter2023_test
         }
 
         [Test]
+        [TestCase(0, null)]
+        [TestCase(0, new int[] { })]
+        [TestCase (1000, new int[] {1000})]
         [TestCase(4, new int[] { 1, 1, 1, 1 })]
         [TestCase(4294967294, new int[] {2147483647, 2147483647 })]
         [TestCase(0, new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})]
