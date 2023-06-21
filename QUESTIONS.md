@@ -12,6 +12,8 @@ Questões
 	Eu usei um laço que lê o array em um uníca passada. Desta forma, fazendo com que a complexidade do algorítimo seja O(n) e tenha uma boa performance com arrays grandes.
 
 3. Como você lidou com os possíveis erros de entrada na implementação do desafio 3, como uma divisão por zero ou uma expressão inválida?
+	Para a expressão inválida, eu utilizei a técnica de Expressão Regular (Regex) para validar o conteúdo da expressão.
+	No caso da divisão por zero, durante a resolução da expressão, eu verifico a operação de divisão e retorno um erro caso ocorra a divisão por zero.
 
 4. Como você implementou a função que remove objetos repetidos na implementação do desafio 4? Quais foram os principais desafios
 encontrados?
