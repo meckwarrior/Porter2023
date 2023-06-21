@@ -47,6 +47,7 @@ namespace Porter2023_test
         }
 
         [Test]
+        [TestCase("50", "50")]
         [TestCase("17", "2 + 3 * 5")]
         [TestCase("16", "4 * 4")]
         [TestCase("5", "25 / 5")]
@@ -54,8 +55,8 @@ namespace Porter2023_test
         [TestCase("0", "555 - 555")]
         [TestCase("100800", "21 * 8 * 6 * 100")]
         [TestCase("0", "21 / 8 / 6 / 100")]
-        [TestCase("135", "21 + 8 + 6 + 100")]
-        [TestCase("-93", "21 - 8 - 6 - 100")]
+        [TestCase("135", "21 +8 + 6 +100")]
+        [TestCase("-93", "21-8-6-100")]
         public void CalcularExpressao_ExpressaoSimples_ResultadoCorreto(string resultado, string expresssao)
         {
             Assert.That(Calculadora.CalcularExpressao(expresssao), Is.EqualTo(resultado));
@@ -71,7 +72,30 @@ namespace Porter2023_test
             Assert.That(Calculadora.CalcularExpressao(expresssao), Is.EqualTo(resultado));
         }
 
-        
+        [Test]
+        [TestCase("ERRO: Expressão Inválida!", "-2 + 3")]
+        [TestCase("ERRO: Expressão Inválida!", "-2 + 3")]
+        [TestCase("ERRO: Expressão Inválida!", "/3")]
+        [TestCase("ERRO: Expressão Inválida!", "1 ++ 3")]
+        [TestCase("ERRO: Expressão Inválida!", "15 +")]
+        [TestCase("ERRO: Expressão Inválida!", "")]
+        [TestCase("ERRO: Expressão Inválida!", "+")]
+        [TestCase("ERRO: Expressão Inválida!", "-")]
+        [TestCase("ERRO: Expressão Inválida!", "/")]
+        [TestCase("ERRO: Expressão Inválida!", "*")]
+        [TestCase("ERRO: Expressão Inválida!", "a")]
+        [TestCase("ERRO: Expressão Inválida!", "A")]
+        [TestCase("ERRO: Expressão Inválida!", "A + B")]
+        [TestCase("ERRO: Expressão Inválida!", "A + b")]
+        [TestCase("ERRO: Expressão Inválida!", "E + 1")]
+        [TestCase("ERRO: Expressão Inválida!", "a + 1")]
+        [TestCase("ERRO: Expressão Inválida!", "a + B")]
+        [TestCase("ERRO: Expressão Inválida!", "a * m")]
+        public void CalcularExpressao_ExpressaInvalida_ErroExpressaoInvalida(string resultado, string expresssao)
+        {
+            Assert.That(Calculadora.CalcularExpressao(expresssao), Is.EqualTo(resultado));
+        }
+
     }
 }
 
