@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Text.RegularExpressions;
 
 namespace Porter2023.Libraries
 {
@@ -29,6 +29,9 @@ namespace Porter2023.Libraries
 
         public static string CalcularExpressao(string expressao)
         {
+            if(!ExpressaoEhValida(expressao))
+                return "ERRO: Expressão Inválida!";
+
             expressao = expressao.Replace(" ", "");
 
             expressao = ResolverOperacoes(expressao, Multiplicacao);
@@ -41,6 +44,11 @@ namespace Porter2023.Libraries
             expressao = ResolverOperacoes(expressao, Subtracao);
 
             return expressao;
+        }
+
+        private static bool ExpressaoEhValida(string expressao)
+        {
+            return Regex.IsMatch(expressao, @"^\s*\d+(\s*[+\-*/]\s*\d+)*$");
         }
 
         private static string ResolverOperacoes(string expressao, char operacao)
