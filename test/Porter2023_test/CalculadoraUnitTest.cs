@@ -45,5 +45,33 @@ namespace Porter2023_test
 
             Assert.That(Calculadora.SomarArray(arrayNumeros), Is.EqualTo(resultado));
         }
+
+        [Test]
+        [TestCase("17", "2 + 3 * 5")]
+        [TestCase("16", "4 * 4")]
+        [TestCase("5", "25 / 5")]
+        [TestCase("2", "1 + 1")]
+        [TestCase("0", "555 - 555")]
+        [TestCase("100800", "21 * 8 * 6 * 100")]
+        [TestCase("0", "21 / 8 / 6 / 100")]
+        [TestCase("135", "21 + 8 + 6 + 100")]
+        [TestCase("-93", "21 - 8 - 6 - 100")]
+        public void CalcularExpressao_ExpressaoSimples_ResultadoCorreto(string resultado, string expresssao)
+        {
+            Assert.That(Calculadora.CalcularExpressao(expresssao), Is.EqualTo(resultado));
+        }
+
+
+        [Test]
+        [TestCase("ERRO: Divisão por zero!" , "2 + 3 - 5 - 8 / 5 * 15 * 0")]
+        [TestCase("ERRO: Divisão por zero!", "5 / 0 + 3 - 5 - 8 / 5 * 15 * 5")]
+        [TestCase("ERRO: Divisão por zero!", "10000 / 0")]
+        public void CalcularExpressao_ExpressaoComZeros_ErroDivisaoPorZero(string resultado, string expresssao)
+        {
+            Assert.That(Calculadora.CalcularExpressao(expresssao), Is.EqualTo(resultado));
+        }
+
+        
     }
 }
+
