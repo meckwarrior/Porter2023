@@ -73,6 +73,7 @@ namespace Porter2023_test
         }
 
         [Test]
+        [TestCase("ERRO: Expressão Inválida!", null)]
         [TestCase("ERRO: Expressão Inválida!", "-2 + 3")]
         [TestCase("ERRO: Expressão Inválida!", "-2 + 3")]
         [TestCase("ERRO: Expressão Inválida!", "/3")]
