@@ -29,7 +29,8 @@ namespace Porter2023.Libraries
 
         public static string CalcularExpressao(string expressao)
         {
-            if(!ExpressaoEhValida(expressao))
+            if(string.IsNullOrEmpty(expressao)
+                || !ExpressaoEhValida(expressao))
                 return "ERRO: Expressão Inválida!";
 
             expressao = expressao.Replace(" ", "");
