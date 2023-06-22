@@ -1,35 +1,19 @@
-﻿using System.Text.RegularExpressions;
+﻿using Porter2023.Bases;
+using Porter2023.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Porter2023.Libraries
 {
-    public class Calculadora
+    public class CalculadoraExpressao : Calculadora, ICalculadoraExpressao
     {
         private const char Multiplicacao = '*';
         private const char Divisao = '/';
         private const char Soma = '+';
         private const char Subtracao = '-';
 
-        public static long SomarArray(int[] numeros)
+        public string Calcular(string expressao)
         {
-            if(numeros == null || numeros.Length == 0) 
-                return 0;
-
-            if (numeros.Length == 1)
-                return numeros[0];
-
-            long soma = 0;
-
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                soma += numeros[i];
-            }
-
-            return soma;
-        }
-
-        public static string CalcularExpressao(string expressao)
-        {
-            if(string.IsNullOrEmpty(expressao)
+            if (string.IsNullOrEmpty(expressao)
                 || !ExpressaoEhValida(expressao))
                 return "ERRO: Expressão Inválida!";
 
@@ -54,7 +38,7 @@ namespace Porter2023.Libraries
 
         private static string ResolverOperacoes(string expressao, char operacao)
         {
-            if(operacao == Subtracao)
+            if (operacao == Subtracao)
                 while (expressao.IndexOf(operacao) != -1 && expressao.Split(operacao)[0] != "")
                     expressao = ResolverTrechos(expressao, operacao);
             else
@@ -73,26 +57,26 @@ namespace Porter2023.Libraries
             {
                 for (int i = indiceOperacao + 1; i < expressao.Length; i++)
                 {
-                    if (expressao[i] == Soma 
-                        || expressao[i] == Subtracao 
-                        || expressao[i] == Multiplicacao 
+                    if (expressao[i] == Soma
+                        || expressao[i] == Subtracao
+                        || expressao[i] == Multiplicacao
                         || expressao[i] == Divisao)
                     {
                         indicePosterior = i;
                         break;
                     }
 
-                    indicePosterior = i+1;
+                    indicePosterior = i + 1;
                 }
 
                 for (int i = indiceOperacao - 1; i > -1; i--)
                 {
-                    if (expressao[i] == Soma 
-                        || expressao[i] == Subtracao 
-                        || expressao[i] == Multiplicacao 
+                    if (expressao[i] == Soma
+                        || expressao[i] == Subtracao
+                        || expressao[i] == Multiplicacao
                         || expressao[i] == Divisao)
                     {
-                        indiceAnterior = i+1;
+                        indiceAnterior = i + 1;
                         break;
                     }
 
@@ -102,8 +86,8 @@ namespace Porter2023.Libraries
 
             string calculo = expressao[indiceAnterior..indicePosterior];
             string resultado = CalcularMiniExpressao(calculo, operacao);
-            
-            if(resultado.StartsWith("E"))
+
+            if (resultado.StartsWith("ERRO"))
                 return resultado;
 
             expressao = expressao.Remove(indiceAnterior, indicePosterior - indiceAnterior);
@@ -127,25 +111,6 @@ namespace Porter2023.Libraries
                 Divisao => b != 0 ? Dividir(a, b).ToString() : "ERRO: Divisão por zero!",
                 _ => "",
             };
-        }
-
-        private static long Somar(int a, int b)
-        {
-            return a + b;
-        }
-
-        private static long Subitrair(int a, int b)
-        {
-            return a - b;
-        }
-
-        private static long Multiplicar(int a, int b)
-        {
-            return a * b;
-        }
-        private static long Dividir(int a, int b)
-        {
-            return a / b;
         }
     }
 }
