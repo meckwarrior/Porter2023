@@ -1,5 +1,6 @@
 ﻿using Porter2023.Bases;
 using Porter2023.Interfaces;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
 namespace Porter2023.Libraries
@@ -11,6 +12,13 @@ namespace Porter2023.Libraries
         private const char Soma = '+';
         private const char Subtracao = '-';
 
+        /// <summary>
+        /// Calcular um expressão matemática simples, sem parenteses 
+        /// e números negativos.
+        /// </summary>
+        /// <param name="expressao">Expressão matemática</param>
+        /// <returns>Uma string com o resultado ou erro de expressão inválida 
+        /// ou erro de divisão por zero.</returns>
         public string Calcular(string expressao)
         {
             if (string.IsNullOrEmpty(expressao)
@@ -22,7 +30,7 @@ namespace Porter2023.Libraries
             expressao = ResolverOperacoes(expressao, Multiplicacao);
             expressao = ResolverOperacoes(expressao, Divisao);
 
-            if (expressao.StartsWith("E"))
+            if (expressao.StartsWith("ERRO"))
                 return expressao;
 
             expressao = ResolverOperacoes(expressao, Soma);
@@ -39,7 +47,8 @@ namespace Porter2023.Libraries
         private static string ResolverOperacoes(string expressao, char operacao)
         {
             if (operacao == Subtracao)
-                while (expressao.IndexOf(operacao) != -1 && expressao.Split(operacao)[0] != "")
+                while (expressao.IndexOf(operacao) != -1 
+                    && expressao.Split(operacao)[0] != "")
                     expressao = ResolverTrechos(expressao, operacao);
             else
                 while (expressao.IndexOf(operacao) != -1)
@@ -55,33 +64,8 @@ namespace Porter2023.Libraries
 
             if (indiceOperacao != -1)
             {
-                for (int i = indiceOperacao + 1; i < expressao.Length; i++)
-                {
-                    if (expressao[i] == Soma
-                        || expressao[i] == Subtracao
-                        || expressao[i] == Multiplicacao
-                        || expressao[i] == Divisao)
-                    {
-                        indicePosterior = i;
-                        break;
-                    }
-
-                    indicePosterior = i + 1;
-                }
-
-                for (int i = indiceOperacao - 1; i > -1; i--)
-                {
-                    if (expressao[i] == Soma
-                        || expressao[i] == Subtracao
-                        || expressao[i] == Multiplicacao
-                        || expressao[i] == Divisao)
-                    {
-                        indiceAnterior = i + 1;
-                        break;
-                    }
-
-                    indiceAnterior = i;
-                }
+                indicePosterior = BuscarIndicePosterior(indiceOperacao, expressao);
+                indiceAnterior = BuscarIndiceAnterior(indiceOperacao, expressao);
             }
 
             string calculo = expressao[indiceAnterior..indicePosterior];
@@ -111,6 +95,48 @@ namespace Porter2023.Libraries
                 Divisao => b != 0 ? Dividir(a, b).ToString() : "ERRO: Divisão por zero!",
                 _ => "",
             };
+        }
+
+        private static int BuscarIndicePosterior(int indiceOperacao, string expressao)
+        {
+            int indicePosterior = 0;
+
+            for (int i = indiceOperacao + 1; i < expressao.Length; i++)
+            {
+                if (expressao[i] == Soma
+                    || expressao[i] == Subtracao
+                    || expressao[i] == Multiplicacao
+                    || expressao[i] == Divisao)
+                {
+                    indicePosterior = i;
+                    break;
+                }
+
+                indicePosterior = i + 1;
+            }
+
+            return indicePosterior;
+        }
+
+        private static int BuscarIndiceAnterior(int indiceOperacao, string expressao)
+        {
+            int indiceAnterior = 0;
+
+            for (int i = indiceOperacao - 1; i > -1; i--)
+            {
+                if (expressao[i] == Soma
+                    || expressao[i] == Subtracao
+                    || expressao[i] == Multiplicacao
+                    || expressao[i] == Divisao)
+                {
+                    indiceAnterior = i + 1;
+                    break;
+                }
+
+                indiceAnterior = i;
+            }
+
+            return indiceAnterior;
         }
     }
 }

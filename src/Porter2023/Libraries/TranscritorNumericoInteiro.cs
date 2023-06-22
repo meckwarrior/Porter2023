@@ -6,6 +6,11 @@ namespace Porter2023.Libraries
 {
     public class TranscritorNumericoInteiro : TranscritorNumerico, ITranscritorNumericoInteiro
     {
+        /// <summary>
+        /// Transcreve um número inteiro por extenso.
+        /// </summary>
+        /// <param name="numero">Número inteiro</param>
+        /// <returns>Uma string com o número transcrito.</returns>
         public string Transcrever(int numero)
         {
             if (numero == 0)
@@ -27,14 +32,7 @@ namespace Porter2023.Libraries
                 int indice = 0;
                 int centena = numero % 1000;
 
-
-                if ((numero / 10) % 10 == 1)
-                {
-                    AdicionarTextoValido(textos,TranscreverNumeros(-1, numero % 10));
-
-                    numero /= 100;
-                    indice = 2;
-                }
+                TratarDezenaEspecial(textos, ref numero, ref indice);
 
                 for (; indice < 3; indice++)
                 {
@@ -46,8 +44,18 @@ namespace Porter2023.Libraries
                 AdicionarTextoValido(textos, TranscreverNumeros(indiceMilhar, numero));
                 indiceMilhar++;
             }
-
             return textos;
+        }
+
+        private void TratarDezenaEspecial(List<string> textos, ref int numero, ref int indice)
+        {
+            if ((numero / 10) % 10 == 1) //Verificando se a dezena é um
+            {
+                AdicionarTextoValido(textos, TranscreverNumeros(-1, numero % 10));
+
+                numero /= 100;
+                indice = 2;
+            }
         }
 
         private string RecomporTexto(IList<string> textos)
@@ -79,6 +87,5 @@ namespace Porter2023.Libraries
             if (!string.IsNullOrEmpty(texto))
                 textos.Add(texto);
         }
-       
     }
 }

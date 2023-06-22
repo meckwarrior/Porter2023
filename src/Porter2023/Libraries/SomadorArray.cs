@@ -4,6 +4,11 @@ namespace Porter2023.Libraries
 {
     public class SomadorArray : ISomadorArray
     {
+        /// <summary>
+        /// Soma de números de um array de inteiros.
+        /// </summary>
+        /// <param name="numeros">Array de inteiros</param>
+        /// <returns>Resultado da soma.</returns>
         public long Somar(int[] numeros)
         {
             if (numeros == null || numeros.Length == 0)

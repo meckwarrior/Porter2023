@@ -6,18 +6,17 @@
         {
             string texto = "";
 
-            switch (indice)
+            return indice switch
             {
-                case 0: return TranscreverUnidade(numero);
-                case 1: return TranscreverDezena(numero);
-                case -1: return TranscreverDezenaEspecial(numero);
-                case 2: return TranscreverCentena(numero);
-                case 10: return TranscreverMilhar(numero);
-                case 11: return TranscreverMilhao(numero);
-                case 12: return TranscreverBilhao(numero);
-            }
-
-            return texto;
+                0 => TranscreverUnidade(numero),
+                1 => TranscreverDezena(numero),
+                -1 => TranscreverDezenaEspecial(numero),
+                2 => TranscreverCentena(numero),
+                10 => TranscreverMilhar(numero),
+                11 => TranscreverMilhao(numero),
+                12 => TranscreverBilhao(numero),
+                _ => texto,
+            };
         }
 
         protected string TranscreverUnidade(int numero)
