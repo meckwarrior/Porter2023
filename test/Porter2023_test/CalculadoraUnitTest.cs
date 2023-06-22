@@ -40,8 +40,8 @@ namespace Porter2023_test
         [Test]
         public void SomarArray_ArrayTamanhoUmMillhao_ResultadoCorreto()
         {
-            long resultado = LongArray.ResultadoArrayUmMilhao;
-            int[] arrayNumeros = LongArray.ArrayUmMilhao;
+            long resultado = ArrayGrande.ResultadoArrayUmMilhao;
+            int[] arrayNumeros = ArrayGrande.ArrayUmMilhao;
 
             Assert.That(Calculadora.SomarArray(arrayNumeros), Is.EqualTo(resultado));
         }
