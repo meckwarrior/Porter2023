@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Porter2023_test
 {
-    public class RemovedorObjetosDuplicadosUnitTest
+    internal class RemovedorObjetosDuplicadosUnitTest
     {
         private int _quantidadeItensUnicos;
         private IRemovedorObjetosDuplicados<int> _removedorInteirosDuplicados;

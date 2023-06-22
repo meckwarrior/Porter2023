@@ -3,7 +3,7 @@ using Porter2023.Libraries;
 
 namespace Porter2023_test
 {
-    public class TranscritorNumericoUnitTest
+    internal class TranscritorNumericoUnitTest
     {
         private ITranscritorNumericoInteiro _subject;
 
