@@ -3,17 +3,27 @@ using System.Text;
 
 namespace Porter2023_test.Helpers
 {
-    internal static class GeradorListaObjetos
+    internal static class GeradorListaObjetos<T>
     {
-        public const int TamanhoItensUnicosInteiros = 9;
-        public const int TamanhoItensUnicosStrings = 4;
-        public const int TamanhoItensUnicosDateTimes = 5;
-        public const int TamanhoItensUnicosStringBuilders = 4;
-        public const int TamanhoItensUnicosPessoas = 20;
-        public const int TamanhoItensUnicosCamposPrivados = 10;
-
-        internal static IList<int> GerarListaInteiros()
+          internal static IList<T> GerarListaDuplicados(out int quantidadeUnicos)
         {
+            quantidadeUnicos = 0;
+            return typeof(T).Name switch
+            {
+                "Int32" => (IList<T>)GerarListaInteirosDuplicados(out quantidadeUnicos),
+                "String" => (IList<T>)GerarListaStringsDuplicados(out quantidadeUnicos),
+                "DateTime" => (IList<T>)GerarListaDateTimesDuplicados(out quantidadeUnicos),
+                "StringBuilder" => (IList<T>)GerarListaStringBuildersDuplicados(out quantidadeUnicos),
+                "Pessoa" => (IList<T>)GerarListaPessoasDuplicados(out quantidadeUnicos),
+                "CamposPrivados" => (IList<T>)GerarListaCamposPrivadosDuplicados(out quantidadeUnicos),
+                _ => new List<T>(),
+            };
+        }
+
+
+        private static IList<int> GerarListaInteirosDuplicados(out int quantidadeUnicos)
+        {
+            quantidadeUnicos = 9;
             IList<int> listaInteiros = new List<int>
             {
                 8,
@@ -38,8 +48,9 @@ namespace Porter2023_test.Helpers
         }
 
 
-        internal static IList<string> GerarListaStrings()
+        private static IList<string> GerarListaStringsDuplicados(out int quantidadeUnicos)
         {
+            quantidadeUnicos = 4;
             IList<string> nomes = new List<string>
             {
                 "Ana",
@@ -54,8 +65,9 @@ namespace Porter2023_test.Helpers
             return nomes;
         }
 
-        internal static IList<DateTime> GerarListaDateTimes()
+        private static IList<DateTime> GerarListaDateTimesDuplicados(out int quantidadeUnicos)
         {
+            quantidadeUnicos = 5;
             IList<DateTime> listaDateTime = new List<DateTime>
             {
                 new DateTime(),
@@ -70,8 +82,9 @@ namespace Porter2023_test.Helpers
             return listaDateTime;
         }
 
-        internal static IList<StringBuilder> GerarListaStringBuilders()
+        private static IList<StringBuilder> GerarListaStringBuildersDuplicados(out int quantidadeUnicos)
         {
+            quantidadeUnicos = 4;
             IList<StringBuilder> listaStringBuilder = new List<StringBuilder>
             {
                 new StringBuilder("Nome"),
@@ -87,8 +100,9 @@ namespace Porter2023_test.Helpers
             return listaStringBuilder;
         }
 
-        internal static IList<Pessoa> GerarListaPessoas()
+        private static IList<Pessoa> GerarListaPessoasDuplicados(out int quantidadeUnicos)
         {
+            quantidadeUnicos = 20;
             IList<Pessoa> pessoas = new List<Pessoa>();
 
             for (int i = 0; i < 20; i++)
@@ -102,8 +116,9 @@ namespace Porter2023_test.Helpers
             return pessoas;
         }
 
-        internal static IList<CamposPrivados> GerarListaCamposPrivados()
-        { 
+        private static IList<CamposPrivados> GerarListaCamposPrivadosDuplicados(out int quantidadeUnicos)
+        {
+            quantidadeUnicos = 10;
             IList<CamposPrivados> camposPrivados = new List<CamposPrivados>();
 
             for (int i = 0; i < 10; i++)

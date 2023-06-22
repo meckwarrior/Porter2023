@@ -7,6 +7,7 @@ namespace Porter2023_test
 {
     public class ComparadorObjetosUnitTest
     {
+        private int _quantidadeItensUnicos;
         [SetUp]
         public void Setup()
         {
@@ -15,67 +16,67 @@ namespace Porter2023_test
         [Test]
         public void RemoverDuplicados_ListaInteiros_ResultadoCorreto()
         {
-            IList<int> inteiros = GeradorListaObjetos.GerarListaInteiros();
+            IList<int> inteiros = GeradorListaObjetos<int>
+                .GerarListaDuplicados(out _quantidadeItensUnicos);
 
             inteiros = ComparadorObjetos<int>.RemoverDuplicados(inteiros);
 
-            Assert.That(inteiros.Count,
-                Is.EqualTo(GeradorListaObjetos.TamanhoItensUnicosInteiros));
+            Assert.That(inteiros.Count, Is.EqualTo(_quantidadeItensUnicos));
         }
 
         [Test]
         public void RemoverDuplicados_ListaString_ResultadoCorreto()
         {
-            IList<string> strings = GeradorListaObjetos.GerarListaStrings();
+            IList<string> strings = GeradorListaObjetos<string>
+                .GerarListaDuplicados(out _quantidadeItensUnicos);
 
             strings = ComparadorObjetos<string>.RemoverDuplicados(strings);
 
-            Assert.That(strings.Count,
-                Is.EqualTo(GeradorListaObjetos.TamanhoItensUnicosStrings));
+            Assert.That(strings.Count, Is.EqualTo(_quantidadeItensUnicos));
         }
 
         [Test]
         public void RemoverDuplicados_ListaPessoas_ResultadoCorreto()
         {
-            IList<Pessoa> pessoas = GeradorListaObjetos.GerarListaPessoas();
+            IList<Pessoa> pessoas = GeradorListaObjetos<Pessoa>
+                .GerarListaDuplicados(out _quantidadeItensUnicos);
 
             pessoas = ComparadorObjetos<Pessoa>.RemoverDuplicados(pessoas);
 
-            Assert.That(pessoas.Count,
-                Is.EqualTo(GeradorListaObjetos.TamanhoItensUnicosPessoas));
+            Assert.That(pessoas.Count, Is.EqualTo(_quantidadeItensUnicos));
         }
 
         [Test]
         public void RemoverDuplicados_ListaDateTimes_ResultadoCorreto()
         {
-            IList<DateTime> dateTimes = GeradorListaObjetos.GerarListaDateTimes();
+            IList<DateTime> dateTimes = GeradorListaObjetos<DateTime>
+                .GerarListaDuplicados(out _quantidadeItensUnicos);
 
             dateTimes = ComparadorObjetos<DateTime>.RemoverDuplicados(dateTimes);
 
-            Assert.That(dateTimes.Count,
-                Is.EqualTo(GeradorListaObjetos.TamanhoItensUnicosDateTimes));
+            Assert.That(dateTimes.Count, Is.EqualTo(_quantidadeItensUnicos));
         }
 
         [Test]
         public void RemoverDuplicados_ListaStringBuilder_ResultadoCorreto()
         {
-            IList<StringBuilder> stringBuilders = GeradorListaObjetos.GerarListaStringBuilders();
+            IList<StringBuilder> stringBuilders = GeradorListaObjetos<StringBuilder>
+                .GerarListaDuplicados(out _quantidadeItensUnicos);
 
             stringBuilders = ComparadorObjetos<StringBuilder>.RemoverDuplicados(stringBuilders);
 
-            Assert.That(stringBuilders.Count,
-                Is.EqualTo(GeradorListaObjetos.TamanhoItensUnicosStringBuilders));
+            Assert.That(stringBuilders.Count, Is.EqualTo(_quantidadeItensUnicos));
         }
 
         [Test]
         public void RemoverDuplicados_ListaCamposPrivados_ResultadoIncorreto()
         {
-            IList<CamposPrivados> camposPrivados = GeradorListaObjetos.GerarListaCamposPrivados();
+            IList<CamposPrivados> camposPrivados = GeradorListaObjetos<CamposPrivados>
+                .GerarListaDuplicados(out _quantidadeItensUnicos);
 
             camposPrivados = ComparadorObjetos<CamposPrivados>.RemoverDuplicados(camposPrivados);
 
-            Assert.That(camposPrivados.Count, 
-                Is.Not.EqualTo(GeradorListaObjetos.TamanhoItensUnicosCamposPrivados));
+            Assert.That(camposPrivados.Count, Is.Not.EqualTo(_quantidadeItensUnicos));
         }
 
         [Test]
@@ -84,9 +85,8 @@ namespace Porter2023_test
             IList<object> listaNula = null;
 
             listaNula = ComparadorObjetos<object>.RemoverDuplicados(listaNula);
-
-            Assert.That(listaNula.Count,
-                Is.EqualTo(0));
+            
+            Assert.That(listaNula.Count, Is.EqualTo(0));
         }
     }
 }
