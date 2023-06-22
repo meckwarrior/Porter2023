@@ -9,12 +9,13 @@ namespace Porter2023.Libraries
         {
             IList<T> result = new List<T>();
 
-            foreach(T objeto in listaObjetos) 
-            {
-                if(!EstaNaLista(result, objeto))
-                    result.Add(objeto);
+            if (listaObjetos != null)
+                foreach(T objeto in listaObjetos) 
+                {
+                    if(!EstaNaLista(result, objeto))
+                        result.Add(objeto);
                 
-            }
+                }
 
             return result;
         }
