@@ -7,26 +7,10 @@ namespace Porter2023_test.Helpers
     {
         public const int TamanhoItensUnicosInteiros = 9;
         public const int TamanhoItensUnicosStrings = 4;
+        public const int TamanhoItensUnicosDateTimes = 5;
         public const int TamanhoItensUnicosStringBuilders = 4;
         public const int TamanhoItensUnicosPessoas = 20;
         public const int TamanhoItensUnicosCamposPrivados = 10;
-
-        internal static IList<StringBuilder> GerarListaStringBuilders()
-        {
-            IList<StringBuilder> listaStringBuilder = new List<StringBuilder>
-            {
-                new StringBuilder("Nome"),
-                new StringBuilder("Nome"),
-                new StringBuilder("Número"),
-                new StringBuilder("Casa"),
-                new StringBuilder("Nome"),
-                new StringBuilder(5),
-                new StringBuilder(5),
-                new StringBuilder("Número")
-            };
-
-            return listaStringBuilder;
-        }
 
         internal static IList<int> GerarListaInteiros()
         {
@@ -68,6 +52,39 @@ namespace Porter2023_test.Helpers
             };
 
             return nomes;
+        }
+
+        internal static IList<DateTime> GerarListaDateTimes()
+        {
+            IList<DateTime> listaDateTime = new List<DateTime>
+            {
+                new DateTime(),
+                new DateTime(),
+                new DateTime(2023,10,10,15,10,0),
+                new DateTime(2023,10,10),
+                new DateTime(204564654654654654),
+                new DateTime(204564654654654654),
+                new DateTime(204564654454654654)
+            };
+
+            return listaDateTime;
+        }
+
+        internal static IList<StringBuilder> GerarListaStringBuilders()
+        {
+            IList<StringBuilder> listaStringBuilder = new List<StringBuilder>
+            {
+                new StringBuilder("Nome"),
+                new StringBuilder("Nome"),
+                new StringBuilder("Número"),
+                new StringBuilder("Casa"),
+                new StringBuilder("Nome"),
+                new StringBuilder(5),
+                new StringBuilder(5),
+                new StringBuilder("Número")
+            };
+
+            return listaStringBuilder;
         }
 
         internal static IList<Pessoa> GerarListaPessoas()

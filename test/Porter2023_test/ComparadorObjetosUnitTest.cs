@@ -46,6 +46,17 @@ namespace Porter2023_test
         }
 
         [Test]
+        public void RemoverDuplicados_ListaDateTimes_ResultadoCorreto()
+        {
+            IList<DateTime> dateTimes = GeradorListaObjetos.GerarListaDateTimes();
+
+            dateTimes = ComparadorObjetos<DateTime>.RemoverDuplicados(dateTimes);
+
+            Assert.That(dateTimes.Count,
+                Is.EqualTo(GeradorListaObjetos.TamanhoItensUnicosDateTimes));
+        }
+
+        [Test]
         public void RemoverDuplicados_ListaStringBuilder_ResultadoCorreto()
         {
             IList<StringBuilder> stringBuilders = GeradorListaObjetos.GerarListaStringBuilders();
@@ -65,6 +76,17 @@ namespace Porter2023_test
 
             Assert.That(camposPrivados.Count, 
                 Is.Not.EqualTo(GeradorListaObjetos.TamanhoItensUnicosCamposPrivados));
+        }
+
+        [Test]
+        public void RemoverDuplicados_ListaNula_ResultadoCorreto()
+        {
+            IList<object> listaNula = null;
+
+            listaNula = ComparadorObjetos<object>.RemoverDuplicados(listaNula);
+
+            Assert.That(listaNula.Count,
+                Is.EqualTo(0));
         }
     }
 }
