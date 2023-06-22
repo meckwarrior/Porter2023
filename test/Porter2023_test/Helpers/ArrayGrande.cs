@@ -1,6 +1,6 @@
 ﻿namespace Porter2023_test.Helpers
 {
-    public static class LongArray
+    public static class ArrayGrande
     {
         public static int[] ArrayUmMilhao => RetornaArrayUmMilhao();
         public static long ResultadoArrayUmMilhao => 500000500000;
