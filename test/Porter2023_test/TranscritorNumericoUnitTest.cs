@@ -1,15 +1,16 @@
+using Porter2023.Interfaces;
 using Porter2023.Libraries;
 
 namespace Porter2023_test
 {
     public class TranscritorNumericoUnitTest
     {
-        private TranscritorNumerico _subject;
+        private ITranscritorNumericoInteiro _subject;
 
         [SetUp]
         public void Setup()
         {
-            _subject = new TranscritorNumerico();
+            _subject = new TranscritorNumericoInteiro();
         }
 
         [Test]
@@ -87,7 +88,7 @@ namespace Porter2023_test
         [TestCase(2001000000, "dois bilhões e um milhão")]
         public void TranscreverInteiro_NumeroPositivo_TextoCorreto(int numero, string textoNumero)
         {
-            Assert.That(_subject.TranscreverInteiro(numero), Is.EqualTo(textoNumero));
+            Assert.That(_subject.Transcrever(numero), Is.EqualTo(textoNumero));
         }
 
         [Test]
@@ -97,7 +98,7 @@ namespace Porter2023_test
         [TestCase(-2000000000, "menos dois bilhões")]
         public void TranscreverInteiro_NumeroNegativo_TextoCorreto(int numero, string textoNumero)
         {
-            Assert.That(_subject.TranscreverInteiro(numero), Is.EqualTo(textoNumero));
+            Assert.That(_subject.Transcrever(numero), Is.EqualTo(textoNumero));
         }
     }
 }
