@@ -1,11 +1,11 @@
-﻿using System.Reflection;
+﻿using Porter2023.Interfaces;
 using System.Text.Json;
 
 namespace Porter2023.Libraries
 {
-    public class ComparadorObjetos<T>
+    public class RemovedorObjetosDuplicados<T> : IRemovedorObjetosDuplicados<T>
     {
-        public static IList<T> RemoverDuplicados(IList<T> listaObjetos)
+        public IList<T> Remover(IList<T> listaObjetos)
         {
             IList<T> result = new List<T>();
 
@@ -20,7 +20,7 @@ namespace Porter2023.Libraries
             return result;
         }
 
-        private static bool EstaNaLista(IList<T> listaObjetos, T objeto)
+        private bool EstaNaLista(IList<T> listaObjetos, T objeto)
         {
             if(typeof(T).FullName.StartsWith("System"))
                 foreach (T _objeto in listaObjetos)
